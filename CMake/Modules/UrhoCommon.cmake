@@ -596,7 +596,7 @@ else ()
                     endif ()
                 endif ()
                 if (NOT URHO3D_SSE)
-                    if (URHO3D_64BIT OR CMAKE_CXX_COMPILER_ID STREQUAL Clang)
+                    if (URHO3D_64BIT OR CMAKE_CXX_COMPILER_ID MATCHES Clang)
                         # Clang enables SSE support for i386 ABI by default, so use the '-mno-sse' compiler flag to nullify that and make it consistent with GCC
                         set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mno-sse")
                         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-sse")
@@ -675,7 +675,7 @@ else ()
         set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG -D_DEBUG")
         set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG -D_DEBUG")
     endif ()
-    if (CMAKE_CXX_COMPILER_ID STREQUAL Clang)
+    if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
         if (NINJA OR "$ENV{USE_CCACHE}")    # Stringify to guard against undefined environment variable
             # When ccache support is on, these flags keep the color diagnostics pipe through ccache output and suppress Clang warning due ccache internal preprocessing step
             set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcolor-diagnostics -Qunused-arguments")
